@@ -40,6 +40,25 @@ public class menuGUI extends JFrame{
         agregar.setBackground(Color.GRAY);
         getContentPane().add(agregar);
         
+        JButton desactivar = new JButton("Desactivar Usuarios");
+        desactivar.setBounds(200,290,200,45);
+        desactivar.setBackground(Color.GRAY);
+        getContentPane().add(desactivar);
+        
+        JButton trofeos = new JButton("Agregar Trofeos");
+        trofeos.setBounds(200,360,200,45);
+        trofeos.setBackground(Color.GRAY);
+        getContentPane().add(trofeos);
+        
+        JButton info = new JButton("Informacion Jugador");
+        info.setBounds(200,430,200,45);
+        info.setBackground(Color.GRAY);
+        getContentPane().add(info);
+        
+        JButton salir = new JButton ("Salir");
+        salir.setBounds(20,20,120,45);
+        getContentPane().add(salir);
+        
     }
     
     public static void main (String []args){
