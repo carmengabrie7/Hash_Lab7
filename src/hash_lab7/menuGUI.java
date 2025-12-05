@@ -33,9 +33,10 @@ public class menuGUI extends JFrame {
         labelLogo.setBounds((600 - 250)/2, 30, 250, 120);
         add(labelLogo);
 
-        JLabel titulo = new JLabel("Menu",SwingConstants.CENTER);
+        JLabel titulo = new JLabel("Menu", SwingConstants.CENTER);
         titulo.setFont(new Font("Comic Sans", Font.BOLD, 45));
-        titulo.setBounds(0,150,600,45);
+        titulo.setBounds(0, 150, 600, 45);
+        titulo.setForeground(Color.WHITE); 
         add(titulo);
 
         JButton agregar = new JButton("Agregar Usuario");
@@ -52,12 +53,10 @@ public class menuGUI extends JFrame {
         long pos = psn.getUsers().search(user.trim());
         
         if (pos != -1) {
-            // Usuario ya existe y está activo
             JOptionPane.showMessageDialog(null, "Usuario ya existe. No se puede agregar.");
             return;
         }
 
-        // Usuario nuevo: valores por defecto
         psn.addUser(user.trim());
         JOptionPane.showMessageDialog(null, "Usuario agregado correctamente.\n"
                 + "\nPuntos: 0"
@@ -85,7 +84,6 @@ public class menuGUI extends JFrame {
             return;
         }
 
-        // Leer estado actual
         psn.getRaf().seek(pos);
         psn.getRaf().readUTF();
         psn.getRaf().readInt();
@@ -97,7 +95,6 @@ public class menuGUI extends JFrame {
             return;
         }
 
-        // Desactivar correctamente
         psn.deactivateUser(user.trim());
         JOptionPane.showMessageDialog(null, "Usuario desactivado correctamente.");
 
@@ -112,8 +109,10 @@ public class menuGUI extends JFrame {
         trofeos.setBackground(Color.white);
         add(trofeos);
         trofeos.addActionListener(e -> {
-    new addTrophieGUI(psn).setVisible(true);
+    new addTrophieGUI(psn, this).setVisible(true);
+    this.setVisible(false);
 });
+
 
 
         JButton info = new JButton("Informacion Jugador");
@@ -121,7 +120,8 @@ public class menuGUI extends JFrame {
         info.setBackground(Color.white);
         add(info);
         info.addActionListener(e -> {
-    new infoGUI(psn).setVisible(true);
+    new infoGUI(psn, this).setVisible(true);
+    this.setVisible(false);
 });
 
         JButton btnsalir = new JButton("Salir");

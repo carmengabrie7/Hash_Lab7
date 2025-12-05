@@ -7,13 +7,16 @@ import java.io.File;
 
 public class addTrophieGUI extends JFrame {
 
+    private JFrame menu; 
     private PSNUsers psn;
     private JTextField txtUser, txtGame, txtTrophy;
     private JComboBox<EnumTrophy> comboTipo;
     private File selectedImage = null;
 
-    public addTrophieGUI(PSNUsers psn) {
+    public addTrophieGUI(PSNUsers psn, JFrame menu) {
+
         this.psn = psn;
+        this.menu = menu;
 
         setTitle("Play Station - Agregar Trofeo");
         setSize(500,500);
@@ -23,7 +26,7 @@ public class addTrophieGUI extends JFrame {
         getContentPane().setBackground(Color.white);
         setLayout(null);
 
-        // TITULO
+        // Título
         JLabel lblTitle = new JLabel("Agregar Trofeo");
         lblTitle.setFont(new Font("Comic Sans", Font.BOLD, 30));
         lblTitle.setBounds(0, 20, 500, 40);
@@ -48,7 +51,7 @@ public class addTrophieGUI extends JFrame {
         txtGame.setBounds(180, 140, 250, 30);
         add(txtGame);
 
-        // Nombre del trofeo
+        // Nombre trofeo
         JLabel lblTrophy = new JLabel("Nombre trofeo:");
         lblTrophy.setBounds(50, 190, 150, 30);
         add(lblTrophy);
@@ -57,7 +60,7 @@ public class addTrophieGUI extends JFrame {
         txtTrophy.setBounds(180, 190, 250, 30);
         add(txtTrophy);
 
-        // Tipo de trofeo
+        // Tipo
         JLabel lblTipo = new JLabel("Tipo:");
         lblTipo.setBounds(50, 240, 150, 30);
         add(lblTipo);
@@ -86,22 +89,25 @@ public class addTrophieGUI extends JFrame {
             }
         });
 
-        // Guardar
+        // BOTÓN GUARDAR
         JButton btnGuardar = new JButton("Guardar");
-        btnGuardar.setBounds(100, 360, 130, 45);
+        btnGuardar.setBounds(80, 360, 150, 45);
         btnGuardar.setBackground(new Color(5,108,201));
         btnGuardar.setForeground(Color.white);
         add(btnGuardar);
 
         btnGuardar.addActionListener(e -> saveTrophy());
 
-        // Cancelar
-        JButton btnSalir = new JButton("Cancelar");
-        btnSalir.setBounds(260, 360, 130, 45);
-        btnSalir.setBackground(new Color(226,226,226));
-        add(btnSalir);
+        // BOTÓN VOLVER
+        JButton btnVolver = new JButton("Volver");
+        btnVolver.setBounds(250, 360, 150, 45);
+        btnVolver.setBackground(new Color(226,226,226));
+        add(btnVolver);
 
-        btnSalir.addActionListener(e -> dispose());
+        btnVolver.addActionListener(e -> {
+            menu.setVisible(true);
+            dispose(); 
+        });
     }
 
     private void saveTrophy() {
@@ -111,22 +117,23 @@ public class addTrophieGUI extends JFrame {
         String trophyName = txtTrophy.getText().trim();
         EnumTrophy type = (EnumTrophy) comboTipo.getSelectedItem();
 
-        // Validación básica
         if (user.isEmpty() || game.isEmpty() || trophyName.isEmpty() || selectedImage == null) {
             JOptionPane.showMessageDialog(this, "Complete todos los campos.");
             return;
         }
 
         try {
+
             psn.addTrophieTo(
-                    user,
-                    game,
-                    trophyName,
-                    type,
-                    selectedImage.getAbsolutePath()
+                user,
+                game,
+                trophyName,
+                type,
+                selectedImage.getAbsolutePath()
             );
 
             JOptionPane.showMessageDialog(this, "Trofeo agregado correctamente.");
+            menu.setVisible(true);
             dispose();
 
         } catch (Exception ex) {

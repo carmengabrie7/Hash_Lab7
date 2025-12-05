@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package hash_lab7;
 
-/**
- *
- * @author eduar
- */
+package hash_lab7;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -86,45 +78,49 @@ public class PSNUsers {
     }
     
      public void addTrophieTo(String username, String game, String trophyName, EnumTrophy type, String imagePath) throws IOException {
-        long pos = users.search(username);
-        if (pos == -1) {
-            System.out.println("Usuario no encontrado.");
-            return;
-        }
-        
 
-        File imgFile = new File(imagePath);
-        if (!imgFile.exists()) {
-            System.out.println("Imagen no encontrada.");
-            return;
-        }
-
-        byte[] imageBytes = Files.readAllBytes(imgFile.toPath());
-
-        try (RandomAccessFile trophyFile = new RandomAccessFile("trophies.psn", "rw")) {
-            trophyFile.seek(trophyFile.length());
-
-            trophyFile.writeUTF(username);
-            trophyFile.writeUTF(type.name());
-            trophyFile.writeUTF(game);
-            trophyFile.writeUTF(trophyName);
-            trophyFile.writeUTF(LocalDate.now().toString());
-            trophyFile.writeInt(imageBytes.length);
-            trophyFile.write(imageBytes);
-        }
-
-        raf.seek(pos);
-        raf.readUTF();
-        long pointerToPoints = raf.getFilePointer();
-        int oldPoints = raf.readInt();
-        int oldTrophies = raf.readInt();
-
-        raf.seek(pointerToPoints);
-        raf.writeInt(oldPoints + type.puntos);
-        raf.writeInt(oldTrophies + 1);
-
-        System.out.println("Trofeo agregado.");
+    long pos = users.search(username);
+    if (pos == -1) {
+        throw new IOException("Usuario no encontrado.");
     }
+
+    raf.seek(pos);
+    raf.readUTF();
+    int oldPoints = raf.readInt();
+    int oldTrophies = raf.readInt();
+    boolean active = raf.readBoolean();
+
+    if (!active) {
+        throw new IOException("Usuario no activo, no se puede agregar trofeo.");
+    }
+
+    File imgFile = new File(imagePath);
+    if (!imgFile.exists()) {
+        throw new IOException("Imagen no encontrada en la ruta especificada.");
+    }
+
+    byte[] imageBytes = Files.readAllBytes(imgFile.toPath());
+
+    try (RandomAccessFile trophyFile = new RandomAccessFile("trophies.psn", "rw")) {
+        trophyFile.seek(trophyFile.length());
+        trophyFile.writeUTF(username);
+        trophyFile.writeUTF(type.name());
+        trophyFile.writeUTF(game);
+        trophyFile.writeUTF(trophyName);
+        trophyFile.writeUTF(LocalDate.now().toString());
+        trophyFile.writeInt(imageBytes.length);
+        trophyFile.write(imageBytes);
+    }
+
+    long pointerToPoints = raf.getFilePointer() - 1 * 4 - 1 * 4;  // reposicionar
+    raf.seek(pos);
+    raf.readUTF();
+    long pointer = raf.getFilePointer();
+    raf.seek(pointer);
+    raf.writeInt(oldPoints + type.puntos);
+    raf.writeInt(oldTrophies + 1);
+}
+
      
        public void playerInfo(String username) throws IOException {
         long pos = users.search(username);
