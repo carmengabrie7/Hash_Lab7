@@ -15,7 +15,8 @@ public class menuGUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
-        getContentPane().setBackground(Color.white);
+        Color azulPlay = new Color(0, 48, 135);
+        getContentPane().setBackground(azulPlay);
         getContentPane().setLayout(null);
 
         try {
@@ -24,7 +25,7 @@ public class menuGUI extends JFrame {
             e.printStackTrace();
         }
 
-        ImageIcon logo = new ImageIcon("src/hash_Lab7/logo.png");
+        ImageIcon logo = new ImageIcon("src/hash_Lab7/logo2.png");
         Image img = logo.getImage().getScaledInstance(250, 100, Image.SCALE_SMOOTH);
         logo = new ImageIcon(img);
 
@@ -39,7 +40,7 @@ public class menuGUI extends JFrame {
 
         JButton agregar = new JButton("Agregar Usuario");
         agregar.setBounds(200,220,200,45);
-        agregar.setBackground(new Color(226,226,226));
+        agregar.setBackground(Color.white);
         add(agregar);
 
         agregar.addActionListener(e -> {
@@ -70,7 +71,7 @@ public class menuGUI extends JFrame {
 
         JButton desactivar = new JButton("Desactivar Usuario");
         desactivar.setBounds(200,290,200,45);
-        desactivar.setBackground(new Color(226,226,226));
+        desactivar.setBackground(Color.white);
         add(desactivar);
 
         desactivar.addActionListener(e -> {
@@ -108,7 +109,7 @@ public class menuGUI extends JFrame {
 
         JButton trofeos = new JButton("Agregar Trofeos");
         trofeos.setBounds(200,360,200,45);
-        trofeos.setBackground(new Color(226,226,226));
+        trofeos.setBackground(Color.white);
         add(trofeos);
         trofeos.addActionListener(e -> {
     new addTrophieGUI(psn).setVisible(true);
@@ -117,7 +118,7 @@ public class menuGUI extends JFrame {
 
         JButton info = new JButton("Informacion Jugador");
         info.setBounds(200,430,200,45);
-        info.setBackground(new Color(226,226,226));
+        info.setBackground(Color.white);
         add(info);
         info.addActionListener(e -> {
     new infoGUI(psn).setVisible(true);
@@ -125,7 +126,7 @@ public class menuGUI extends JFrame {
 
         JButton btnsalir = new JButton("Salir");
         btnsalir.setBounds(20,20,120,45);
-        btnsalir.setBackground(new Color(5,108,201));
+        btnsalir.setBackground(Color.white);
         add(btnsalir);
 
         btnsalir.addActionListener(e -> System.exit(0));
