@@ -15,7 +15,7 @@ public enum EnumTrophy {
     public int puntos;
     
     private EnumTrophy(int points){
-        this.puntos = puntos;
+        this.puntos = points;
     }
     
     public int getPuntos(){

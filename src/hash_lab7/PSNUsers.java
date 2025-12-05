@@ -24,6 +24,17 @@ public class PSNUsers {
         reloadHashTable();
     }
     
+    public HashTable getUsers(){
+    return users;
+}
+
+    public RandomAccessFile getRaf() {
+    return raf;
+}
+
+
+
+    
     private void reloadHashTable()throws IOException{
         raf.seek(0);
         while(raf.getFilePointer() < raf.length()){
@@ -80,6 +91,7 @@ public class PSNUsers {
             System.out.println("Usuario no encontrado.");
             return;
         }
+        
 
         File imgFile = new File(imagePath);
         if (!imgFile.exists()) {
