@@ -26,14 +26,14 @@ public class addTrophieGUI extends JFrame {
         getContentPane().setBackground(Color.white);
         setLayout(null);
 
-        // Título
+        
         JLabel lblTitle = new JLabel("Agregar Trofeo");
         lblTitle.setFont(new Font("Comic Sans", Font.BOLD, 30));
         lblTitle.setBounds(0, 20, 500, 40);
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblTitle);
 
-        // Usuario
+      
         JLabel lblUser = new JLabel("Usuario:");
         lblUser.setBounds(50, 90, 150, 30);
         add(lblUser);
@@ -42,7 +42,7 @@ public class addTrophieGUI extends JFrame {
         txtUser.setBounds(180, 90, 250, 30);
         add(txtUser);
 
-        // Juego
+      
         JLabel lblGame = new JLabel("Juego:");
         lblGame.setBounds(50, 140, 150, 30);
         add(lblGame);
@@ -51,7 +51,7 @@ public class addTrophieGUI extends JFrame {
         txtGame.setBounds(180, 140, 250, 30);
         add(txtGame);
 
-        // Nombre trofeo
+        
         JLabel lblTrophy = new JLabel("Nombre trofeo:");
         lblTrophy.setBounds(50, 190, 150, 30);
         add(lblTrophy);
@@ -60,7 +60,7 @@ public class addTrophieGUI extends JFrame {
         txtTrophy.setBounds(180, 190, 250, 30);
         add(txtTrophy);
 
-        // Tipo
+       
         JLabel lblTipo = new JLabel("Tipo:");
         lblTipo.setBounds(50, 240, 150, 30);
         add(lblTipo);
@@ -69,7 +69,7 @@ public class addTrophieGUI extends JFrame {
         comboTipo.setBounds(180, 240, 250, 30);
         add(comboTipo);
 
-        // Imagen
+        
         JButton btnImagen = new JButton("Seleccionar imagen");
         btnImagen.setBounds(50, 290, 170, 35);
         btnImagen.setBackground(new Color(226,226,226));
@@ -89,7 +89,7 @@ public class addTrophieGUI extends JFrame {
             }
         });
 
-        // BOTÓN GUARDAR
+        
         JButton btnGuardar = new JButton("Guardar");
         btnGuardar.setBounds(80, 360, 150, 45);
         btnGuardar.setBackground(new Color(5,108,201));
@@ -98,7 +98,7 @@ public class addTrophieGUI extends JFrame {
 
         btnGuardar.addActionListener(e -> saveTrophy());
 
-        // BOTÓN VOLVER
+        
         JButton btnVolver = new JButton("Volver");
         btnVolver.setBounds(250, 360, 150, 45);
         btnVolver.setBackground(new Color(226,226,226));
