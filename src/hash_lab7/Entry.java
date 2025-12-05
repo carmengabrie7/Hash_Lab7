@@ -5,7 +5,7 @@ public class Entry {
     private long pos;
     private Entry next;
     
-    public Entry (String username, long pos, Entry next){
+    public Entry (String username, long pos){
         this.username = username;
         this.pos = pos;
         this.next=null;
